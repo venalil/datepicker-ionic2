@@ -3,6 +3,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { timepicker_style } from './timepicker.component.style';
 import { timepicker_markup } from './timepicker.component.markup';
 import { PickerComponent } from '../picker.component';
+import { DateService } from '../picker.service';
 @Component({
     template: timepicker_markup,
     styles: [timepicker_style],
@@ -14,8 +15,8 @@ export class TimePickerComponent extends PickerComponent {
     public minutes: string[];
     @ViewChild('minutescroll') private minutescroll: ElementRef;
     @ViewChild('hourscroll') private hourscroll: ElementRef;
-    constructor(viewCtrl: ViewController, navParams: NavParams) {
-        super(navParams.data, viewCtrl);
+    constructor(viewCtrl: ViewController, dateService: DateService, navParams: NavParams) {
+        super(navParams.data, dateService, viewCtrl);
     }
 
     protected ngAfterViewChecked(): void {

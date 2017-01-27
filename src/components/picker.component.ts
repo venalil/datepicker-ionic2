@@ -1,6 +1,7 @@
 import { PickerData } from './picker.interface';
 import { EventEmitter } from '@angular/core';
 import { ViewController } from 'ionic-angular';
+import { DateService } from './picker.service';
 export abstract class PickerComponent {
     protected static config: any;
     protected date: Date;
@@ -15,7 +16,7 @@ export abstract class PickerComponent {
     protected today: Date = new Date();
     protected selectedDate: Date = new Date();
     protected tempDate: Date;
-    constructor(protected data: PickerData, protected viewCtrl: ViewController) {
+    constructor(protected data: PickerData, protected dateService: DateService, protected viewCtrl: ViewController) {
         this.callback = data.changed;
         this.min = data.min;
         this.max = data.max;

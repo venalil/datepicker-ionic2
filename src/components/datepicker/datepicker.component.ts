@@ -22,8 +22,8 @@ export class DatePickerComponent extends PickerComponent {
     private calendar: boolean;
     private type: 'date' | 'string' | 'year' | 'month' | 'calendar' = 'date';
     private mode: 'calendar' | undefined = 'calendar';
-    constructor(private DatepickerService: DateService, viewCtrl: ViewController, navParams: NavParams) {
-        super(navParams.data, viewCtrl);
+    constructor(dateService: DateService, viewCtrl: ViewController, navParams: NavParams) {
+        super(navParams.data, dateService, viewCtrl);
         this.calendar = navParams.data.calendar || false;
         if (this.calendar) this.type = 'calendar';
     }
@@ -37,27 +37,27 @@ export class DatePickerComponent extends PickerComponent {
 
     public getDaysOfWeek(): string[] {
         if (!this.weekdays) {
-            this.weekdays = this.DatepickerService.getDaysOfWeek();
+            this.weekdays = this.dateService.getDaysOfWeek();
         }
         return this.weekdays;
     }
 
     public getMonths(): string[] {
         if (!this.months) {
-            this.months = this.DatepickerService.getMonths();
+            this.months = this.dateService.getMonths();
         }
         return this.months;
     }
 
     public getYears(): string[] {
         if (!this.years) {
-            this.years = this.DatepickerService.getYears();
+            this.years = this.dateService.getYears();
         }
         return this.years;
     }
 
     protected createDateList(selectedDate: Date): void {
-        this.dateList = this.DatepickerService.createDateList(selectedDate);
+        this.dateList = this.dateService.createDateList(selectedDate);
         this.cols = new Array(7);
         this.rows = new Array(Math.round(this.dateList.length / this.cols.length) + 1);
     }
