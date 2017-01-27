@@ -1,4 +1,4 @@
-import { nls } from './nls';
+import { nls } from './datepicker/nls';
 import { Injectable } from '@angular/core';
 
 /**
@@ -18,19 +18,21 @@ export class DateService {
     }
     constructor(private DatepickerNls: nls, ) {
     }
-    // private locale = ((<any>window).navigator['userLanguage'] || window.navigator.language).toLowerCase();
 
     public getDaysOfWeek() {
         return this.DatepickerNls.getWeekdays(this.locale);
     }
+
     public getMonths() {
         return this.DatepickerNls.getMonths(this.locale);
     }
-    public getYears() {
-        let years: Array<any> = [];
-        for (var i = 1900; i < 2101; i++) years.push(i);
+
+    public getYears(): string[] {
+        let years: Array<string> = [];
+        for (var i = 1900; i < 2101; i++) years.push(i.toString());
         return years;
     }
+
     public createDateList(currentDate: Date) {
         let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDate();
         let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()

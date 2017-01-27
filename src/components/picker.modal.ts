@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { App, ModalOptions, NavOptions, ViewController, ModalCmp } from 'ionic-angular';
-import { DatePickerComponent } from './datepicker.component';
+import { DatePickerComponent } from './datepicker/datepicker.component';
+import { TimePickerComponent } from './timepicker/timepicker.component';
 import { AppPortal } from 'ionic-angular/components/app/app-root';
 /**
  * @private
  */
-export class DatePickerDisplayer extends ViewController {
+export class PickerDisplayer extends ViewController {
     private _app: App;
     private _enterAnimation: string;
     private _leaveAnimation: string;
@@ -52,21 +53,33 @@ export class DatePickerDisplayer extends ViewController {
     }
 }
 @Injectable()
-export class DatePickerController {
+export class PickerController {
 
     constructor(private _app: App) { }
     /**
-     * Create a modal to display. See below for options.
+     * Create a date modal to display. See below for options.
      *
-     * @param {object} component The Modal view
      * @param {object} data Any data to pass to the Modal view
      * @param {object} opts Modal options
      */
-    create(data: any = {}, opts: ModalOptions = {}) {
+    createDatePicker(data: any = {}, opts: ModalOptions = {}) {
         data.component = DatePickerComponent;
         opts.showBackdrop = opts.showBackdrop !== undefined ? !!opts.showBackdrop : true;
         opts.enableBackdropDismiss = opts.enableBackdropDismiss !== undefined ? !!opts.enableBackdropDismiss : true;
         data.opts = opts;
-        return new DatePickerDisplayer(this._app, data);
+        return new PickerDisplayer(this._app, data);
+    }
+     /**
+     * Create a date modal to display. See below for options.
+     *
+     * @param {object} data Any data to pass to the Modal view
+     * @param {object} opts Modal options
+     */
+    createTimePicker(data: any = {}, opts: ModalOptions = {}) {
+        data.component = TimePickerComponent;
+        opts.showBackdrop = opts.showBackdrop !== undefined ? !!opts.showBackdrop : true;
+        opts.enableBackdropDismiss = opts.enableBackdropDismiss !== undefined ? !!opts.enableBackdropDismiss : true;
+        data.opts = opts;
+        return new PickerDisplayer(this._app, data);
     }
 }

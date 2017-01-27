@@ -1,13 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { DatePickerController, DatePickerDisplayer } from './components/datepicker.modal';
-
+import {
+    DatePickerComponent,
+    DatePickerDirective,
+    nls
+}
+    from './components/datepicker';
+import {
+    TimePickerComponent,
+    TimePickerData,
+    TimePickerDirective
+}
+    from './components/timepicker';
+import { DateService } from './components/picker.service';
+import { PickerController, PickerDisplayer } from './components/picker.modal';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { DatePickerComponent } from './components/datepicker.component';
-import { DatePickerDirective } from './components/datepicker.directive';
-import { DateService } from './components/datepicker.service';
 import { ViewController } from 'ionic-angular';
-import { nls } from './components/nls';
 
 @NgModule({
     imports: [
@@ -16,13 +24,15 @@ import { nls } from './components/nls';
     ],
     exports: [
         DatePickerComponent,
-        DatePickerDirective],
-    entryComponents: [DatePickerComponent],
-    declarations: [DatePickerComponent, DatePickerDirective],
+        DatePickerDirective,
+        TimePickerComponent,
+        TimePickerDirective],
+    entryComponents: [DatePickerComponent, TimePickerComponent],
+    declarations: [DatePickerComponent, DatePickerDirective, TimePickerComponent, TimePickerDirective],
     providers: [
         DateService,
         nls,
-        DatePickerController],
+        PickerController],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]
